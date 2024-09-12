@@ -1,5 +1,4 @@
 import pygame
-import pprint
 
 class JoystickController:
     def __init__(self):
@@ -51,14 +50,7 @@ class JoystickController:
             elif event.type == pygame.KEYUP:
                 if event.key in self.keyboard_data:
                     self.keyboard_data[event.key] = False
-
-        # Optionally, update keyboard state for all keys
-        keys = pygame.key.get_pressed()
-        for key in self.keyboard_data.keys():
-            if keys[key]:
-                self.keyboard_data[key] = True
-            else:
-                self.keyboard_data[key] = False
+        pygame.display.update()
 
     def get_key_name(self, key):
         """Get the name of the key based on its pygame key constant"""
@@ -93,7 +85,6 @@ def main():
             print(f"  {controller.get_key_name(key)}: {'Pressed' if pressed else 'Released'}")
         
         pygame.display.flip()  # Update the display
-        pygame.time.wait(100)  # To prevent flooding the console with messages
 
     pygame.quit()
 
